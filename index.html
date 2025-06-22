@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Aguiar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #181d23;
+            color: #e5e7eb;
+            min-height: 100vh;
+        }
+        header {
+            text-align: center;
+            padding: 0 0 8px 0;
+            position: relative;
+        }
+        header h1 {
+            color: #ed2228;
+            font-size: 2.9rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            opacity: 1;
+            margin-top: 10px;
+            margin-bottom: 0;
+            line-height: 1.02;
+            transition: opacity 0.2s;
+        }
+        .links-container {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin-bottom: 26px;
+            margin-top: 10px;
+        }
+        .link-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #222c37;
+            color: #ff4747;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 26px;
+            font-size: 1.13rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: box-shadow 0.2s, background 0.2s;
+            box-shadow: 0 2px 12px #1a222b66;
+            text-decoration: none;
+        }
+        .link-btn:hover {
+            background: #2d3640;
+            box-shadow: 0 4px 18px #1a222b99;
+        }
+        .link-btn svg {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: middle;
+        }
+        .container {
+            display: flex;
+            margin: 0 auto;
+            max-width: 1200px;
+            min-height: 600px;
+            background: transparent;
+            border-radius: 12px;
+        }
+        nav {
+            width: 220px;
+            background: #181d23;
+            padding: 30px 0 0 0;
+            border-top-left-radius: 12px;
+            box-shadow: none !important;
+        }
+        nav ul {
+            list-style: none;
+        }
+        nav li {
+            padding: 13px 28px;
+            color: #d1e2ee;
+            cursor: pointer;
+            font-size: 1.13rem;
+            font-weight: 700;
+            border-left: 4px solid transparent;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+        }
+        nav li.active,
+        nav li:hover {
+            background: #1e2431;
+            color: #ff4747;
+            border-left: 4px solid #ff4747;
+        }
+        main {
+            flex: 1;
+            padding: 38px 38px;
+            background: radial-gradient(ellipse 120% 80% at 60% 30%, #232b35 80%, #181d23 100%);
+            border-top-right-radius: 12px;
+        }
+        .card {
+            background: #212428;
+            box-shadow: 0 0 24px 3px #ff474722, 0 0 0 6px transparent;
+            border-radius: 24px;
+            padding: 28px 24px 32px 32px;
+            min-height: 220px;
+            transition: box-shadow 0.2s;
+        }
+        .card h2 {
+            color: #ff4747;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+        .executors-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .executor-card {
+            background: #181c20;
+            box-shadow: 0 0 18px 2px #ff474744;
+            border-radius: 18px;
+            padding: 30px 18px 32px 18px;
+            min-height: 168px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            transition: box-shadow 0.2s;
+            position: relative;
+        }
+        .executor-title {
+            font-size: 1.25rem;
+            color: #ff4747;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .executor-desc {
+            color: #b0c6d5;
+            font-size: 1.04rem;
+            margin-bottom: 16px;
+        }
+        .executor-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: auto;
+        }
+        .executor-link-btn {
+            display: inline-block;
+            background: #ff4747;
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: bold;
+            padding: 11px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 14px #ff474766;
+            transition: background 0.18s, box-shadow 0.18s;
+        }
+        .executor-link-btn:hover {
+            background: #ff1a1a;
+            box-shadow: 0 4px 22px #ff474799;
+        }
+        .arrow {
+            margin-left: auto;
+            color: #ff4747;
+            font-size: 1.35rem;
+            transition: color 0.15s;
+        }
+        .executor-actions:hover .arrow {
+            color: #ff1a1a;
+        }
+        /* SCRIPTS CARD */
+        .scripts-card {
+            background: #212428;
+            border-radius: 24px;
+            padding: 2px 0px 0px 0px;
+            margin-top: 0px;
+        }
+        .scripts-title {
+            color: #ff4747;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .scripts-desc {
+            color: #e5e7eb;
+            font-size: 1.08rem;
+            margin-bottom: 18px;
+        }
+        .script-block {
+            background: #181c20;
+            box-shadow: 0 0 18px 2px #ff474744;
+            border-radius: 18px;
+            padding: 30px 18px 32px 18px;
+            margin-bottom: 0;
+            margin-top: 16px;
+        }
+        .script-title {
+            color: #ff4747;
+            font-size: 1.28rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .script-desc {
+            color: #b0c6d5;
+            font-size: 1.04rem;
+            margin-bottom: 20px;
+        }
+        .script-label {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.07rem;
+            margin-bottom: 7px;
+            display: inline-block;
+        }
+        .code-block-container {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+            gap: 14px;
+        }
+        .code-block {
+            background: #191e22;
+            color: #ff4747;
+            font-family: 'Fira Mono', 'Menlo', 'Consolas', monospace;
+            border-radius: 8px;
+            padding: 12px 8px;
+            font-size: 1.03rem;
+            word-break: break-all;
+            box-shadow: 0 0 12px #ff474722;
+            flex: 1;
+            border: 1px solid #ff474733;
+        }
+        .copy-btn {
+            padding: 10px 18px;
+            background: #ff4747;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.18s;
+            box-shadow: 0 2px 8px #ff474766;
+        }
+        .copy-btn:hover {
+            background: #ff1a1a;
+        }
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            nav {
+                width: 100%;
+                border-radius: 0;
+            }
+            main {
+                border-radius: 0;
+                padding: 24px 8px;
+            }
+            header h1 {
+                font-size: 2.2rem;
+            }
+            .card, .scripts-card {
+                padding: 16px 4px 18px 4px;
+                max-width: 99vw;
+            }
+            .executor-card, .script-block {
+                padding: 12px 6px 16px 6px;
+            }
+            .code-block {
+                font-size: 0.95rem;
+                padding: 8px 4px;
+            }
+            .copy-btn {
+                padding: 7px 10px;
+                font-size: 0.92rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aguiar</h1>
+        <div class="links-container">
+            <a class="link-btn" href="https://youtube.com/" target="_blank">YouTube</a>
+            <a class="link-btn" href="https://discord.com/" target="_blank">Discord</a>
+            <a class="link-btn" href="https://github.com/" target="_blank">GitHub</a>
+        </div>
+    </header>
+    <div class="container">
+        <nav>
+            <ul id="nav-list">
+                <li id="executoresTab" class="active" onclick="showContent('executores')">Executores</li>
+                <li id="scriptsTab" onclick="showContent('scripts')">Scripts</li>
+            </ul>
+        </nav>
+        <main>
+            <div id="content" class="card">
+                <h2>Executores</h2>
+                <div class="executors-grid">
+                    <div class="executor-card">
+                        <div>
+                            <div class="executor-title">Executor Pc</div>
+                            <div class="executor-desc">Executor feito pelo Aguiar.</div>
+                        </div>
+                        <div class="executor-actions">
+                            <a href="https://mega.nz/folder/lucGBSiT#uWX9tAVbO9VXMpmtnLjHNg" target="_blank" class="executor-link-btn">Acessar Site</a>
+                            <span class="arrow">&rarr;</span>
+                        </div>
+                    </div>
+                    <div class="executor-card">
+                        <div>
+                            <div class="executor-title">Executor Mega Direct</div>
+                            <div class="executor-desc">Outro executor disponível para download direto.</div>
+                        </div>
+                        <div class="executor-actions">
+                            <a href="https://mega.nz/folder/N68VSa6Y#l3vO4dLWs-FS5MMbvc5bdg" target="_blank" class="executor-link-btn">Acessar Site</a>
+                            <span class="arrow">&rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const scripts = {
+            executores: {
+                title: 'Executores',
+                html: `
+                <div class="executors-grid">
+                    <div class="executor-card">
+                        <div>
+                            <div class="executor-title">Executor Pc Aguiar</div>
+                            <div class="executor-desc">Executor feito pelo Aguiar.</div>
+                        </div>
+                        <div class="executor-actions">
+                            <a href="https://mega.nz/folder/lucGBSiT#uWX9tAVbO9VXMpmtnLjHNg" target="_blank" class="executor-link-btn">Acessar Site</a>
+                            <span class="arrow">&rarr;</span>
+                        </div>
+                    </div>
+                    <div class="executor-card">
+                        <div>
+                            <div class="executor-title">Executor Pc Kali</div>
+                            <div class="executor-desc">Executor feito pelo sw1ft.</div>
+                        </div>
+                        <div class="executor-actions">
+                            <a href="https://mega.nz/folder/N68VSa6Y#l3vO4dLWs-FS5MMbvc5bdg" target="_blank" class="executor-link-btn">Acessar Site</a>
+                            <span class="arrow">&rarr;</span>
+                        </div>
+                    </div>
+                </div>
+                `
+            },
+            scripts: {
+                title: 'Scripts',
+                html: `
+                <div class="scripts-card">
+                    <div class="script-block">
+                        <div class="scripts-title">Scripts</div>
+                        <div class="script-desc">
+                            SCRIPT CRIADO POR SW1FT ROUBE UM BRAINROT
+                        </div>
+                        <div class="code-block-container">
+                            <div class="code-block" id="code-script-1">
+loadstring(game:HttpGet("https://oreofdev.github.io/Sw1ftSync/SSXBr/"))()
+                            </div>
+                            <button class="copy-btn" onclick="copyCode('code-script-1', this)">Copiar</button>
+                        </div>
+                    </div>
+                    <div class="script-block">
+                        <div class="scripts-title">Scripts</div>
+                        <div class="script-desc">
+                            SCRIPT SEM KEY DE GROW A GARDEN
+                        </div>
+                        <div class="code-block-container">
+                            <div class="code-block" id="code-script-2">
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/NoLag-id/No-Lag-HUB/refs/heads/main/Loader/LoaderV1.lua"))()
+                            </div>
+                            <button class="copy-btn" onclick="copyCode('code-script-2', this)">Copiar</button>
+                        </div>
+                    </div>
+                    <div class="script-block">
+                        <div class="scripts-title">Scripts</div>
+                        <div class="script-desc">
+                            SCRIPT CRIADO POR FUNNY HUB DE FORSAKEN
+                        </div>
+                        <div class="code-block-container">
+                            <div class="code-block" id="code-script-3">
+loadstring(game:HttpGet("https://pastefy.app/qNeSwq6A/raw"))()
+                            </div>
+                            <button class="copy-btn" onclick="copyCode('code-script-3', this)">Copiar</button>
+                        </div>
+                    </div>
+                </div>
+                `
+            }
+        };
+
+        function showContent(section) {
+            document.querySelectorAll('#nav-list li').forEach(li => li.classList.remove('active'));
+            if(section === 'executores') {
+                document.getElementById('executoresTab').classList.add('active');
+            } else if(section === 'scripts') {
+                document.getElementById('scriptsTab').classList.add('active');
+            }
+            const content = document.getElementById('content');
+            content.innerHTML = scripts[section].html;
+        }
+
+        function copyCode(codeId, btn) {
+            const code = document.getElementById(codeId).innerText.trim();
+            navigator.clipboard.writeText(code).then(function() {
+                btn.innerText = "Copiado!";
+                setTimeout(() => { btn.innerText = "Copiar"; }, 1800);
+            });
+        }
+    </script>
+</body>
+</html>
